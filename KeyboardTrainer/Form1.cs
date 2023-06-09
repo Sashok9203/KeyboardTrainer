@@ -55,33 +55,32 @@ namespace WinFormsApp1
         private void userTextChanged(object sender, EventArgs e)
         {
             
-                wordsExample.Clear();
-                wordsExample.SelectionStart = wordsExample.TextLength;
-                wordsExample.SelectionLength = 0;
-                wordsExample.SelectionColor = Color.Red;
-                wordsExample.AppendText(exampleText[0..userEnter.Text.Length]);
-                wordsExample.SelectionColor = wordsExample.ForeColor;
-                wordsExample.AppendText(exampleText[userEnter.Text.Length..]);
-                userEnter.Focus();
+            wordsExample.Clear();
+            wordsExample.SelectionStart = wordsExample.TextLength;
+            wordsExample.SelectionLength = 0;
+            wordsExample.SelectionColor = Color.Red;
+            wordsExample.AppendText(exampleText[0..userEnter.Text.Length]);
+            wordsExample.SelectionColor = wordsExample.ForeColor;
+            wordsExample.AppendText(exampleText[userEnter.Text.Length..]);
+            userEnter.Focus();
             
 
-                bool charEqual = yesRadioButton.Checked ? userEnter.Text.Last() == wordsExample.Text[userEnter.Text.Length - 1]
-                          : Char.ToLower(userEnter.Text.Last()) == Char.ToLower(wordsExample.Text[userEnter.Text.Length - 1]);
+            bool charEqual = yesRadioButton.Checked ? userEnter.Text.Last() == wordsExample.Text[userEnter.Text.Length - 1]
+                        : Char.ToLower(userEnter.Text.Last()) == Char.ToLower(wordsExample.Text[userEnter.Text.Length - 1]);
 
-                if (charEqual)
-                {
-                    ++progressBar.Value;
-                    rChar.Text = $"{progressBar.Value}/{wordsExample.Text.Length}";
-                }
-                else
-                {
-                    userEnter.TextChanged -= userTextChanged;
-                    userEnter.Text = userEnter.Text[0..^1] + '*';
-                    userEnter.SelectionStart = userEnter.Text.Length;
-                    userEnter.TextChanged += userTextChanged;
-                }
+            if (charEqual)
+            {
+                ++progressBar.Value;
+                rChar.Text = $"{progressBar.Value}/{wordsExample.Text.Length}";
+            }
+            else
+            {
+                userEnter.TextChanged -= userTextChanged;
+                userEnter.Text = userEnter.Text[0..^1] + '*';
+                userEnter.SelectionStart = userEnter.Text.Length;
+                userEnter.TextChanged += userTextChanged;
+            }
             
-
             if(userEnter.Text.Length == wordsExample.TextLength)
             {
                 userEnter.TextChanged -= userTextChanged;
