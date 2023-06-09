@@ -25,22 +25,24 @@ namespace WinFormsApp1
         private void startButtonClick(object sender, EventArgs e)
         {
             userEnter.Clear();
-            exampleText = text[0..getWords(text, ((int)wordsCount.Value))];
+            exampleText = text[0..getLastTextPos(text, ((int)wordsCount.Value))];
             wordsExample.Text = exampleText;
             timer1.Start();
             progressBar.Maximum = wordsExample.Text.Length;
             userEnter.TextChanged += userTextChanged;
             userEnter.Focus();
+            startButton.Enabled = false;
         }
 
-        private int getWords(string text, int count)
+        private int getLastTextPos(string text, int count)
         {
             for (int i = 0; i < text.Length; i++)
             {
                 if (text[i] == ' ') count--;
                 if (count == 0) return i;
             }
-            return 0;
+            wordsCount.Value -= count;
+            return text.Length - 1;
         }
 
         private void timerTick(object sender, EventArgs e)
@@ -54,7 +56,6 @@ namespace WinFormsApp1
         {
             if (userEnter.Text.Length <= wordsExample.TextLength)
             {
-                wordsExample.Focus();
                 wordsExample.Clear();
                 wordsExample.SelectionStart = wordsExample.TextLength;
                 wordsExample.SelectionLength = 0;
@@ -87,6 +88,7 @@ namespace WinFormsApp1
                 timer1.Stop();
                 MessageBox.Show($"Your result : {(time != 0 ? (int)Math.Round((progressBar.Value / (float)time) * 600) : 0)} char by minute", "Result");
                 Clear();
+                startButton.Enabled = true;
             }
         }
 

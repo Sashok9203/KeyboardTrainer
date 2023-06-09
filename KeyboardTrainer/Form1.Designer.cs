@@ -166,6 +166,7 @@
             // wordsExample
             // 
             wordsExample.AutoWordSelection = true;
+            wordsExample.Enabled = false;
             wordsExample.Location = new Point(53, 120);
             wordsExample.Name = "wordsExample";
             wordsExample.ReadOnly = true;
