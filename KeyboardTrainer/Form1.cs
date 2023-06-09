@@ -32,6 +32,9 @@ namespace WinFormsApp1
             userEnter.TextChanged += userTextChanged;
             userEnter.Focus();
             startButton.Enabled = false;
+            yesRadioButton.Enabled = false;
+            noRadioButton.Enabled = false;
+            wordsCount.Enabled = false;
         }
 
         private int getLastTextPos(string text, int count)
@@ -88,6 +91,9 @@ namespace WinFormsApp1
                 MessageBox.Show($"Your result : {(time != 0 ? (int)Math.Round((progressBar.Value / (float)time) * 600) : 0)} char by minute", "Result");
                 Clear();
                 startButton.Enabled = true;
+                yesRadioButton.Enabled = true;
+                noRadioButton.Enabled = true;
+                wordsCount.Enabled = true;
             }
         }
 
